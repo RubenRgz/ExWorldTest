@@ -27,6 +27,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Called when shoot input is pressed
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void OnShootStart();
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Gameplay")
 	EObjectType ObjectType;
