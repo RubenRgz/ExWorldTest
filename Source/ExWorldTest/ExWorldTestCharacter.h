@@ -31,7 +31,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void OnShootStart();
 
-	// Called when projectile object overlaps an object
+	// Called when projectile actor overlaps an object
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void OnShootEnd();
 
@@ -39,9 +39,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void OnSpawnProjectile(FVector StartPoint, FVector EndPoint);
 
-	// Called when projectile object overlaps an object to apply a specific effect
+	// Called when OnShootEnd event is called to apply a specific effect
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void OnApplyEffect(EObjectType CollidedTypeObject, EEffectType EffectToApply, bool IsAOEDamage, const TArray<EObjectType>& AffectedTypes, int32 NumOFAffecfted);
+	void OnApplyEffect(FEffectData EffectInfo);
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Gameplay")
