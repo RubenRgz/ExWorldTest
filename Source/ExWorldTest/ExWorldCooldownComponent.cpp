@@ -22,7 +22,7 @@ void UExWorldCooldownComponent::BeginPlay()
 
 	// ...
 	
-	CooldownActive = false;
+	IsCooldownActive = false;
 }
 
 
@@ -40,13 +40,13 @@ void UExWorldCooldownComponent::StartCooldown(AActor* Owner)
 {
 	WorldContext = Owner->GetWorld();
 	StartTime = GetWorldTime();
-	CooldownActive = true;
+	IsCooldownActive = true;
 	OnCooldownStart.Broadcast(this);
 }
 
 void UExWorldCooldownComponent::CheckDuration()
 {
-	if (CooldownActive)
+	if (IsCooldownActive)
 	{
 		float CurrentTime = GetWorldTime();
 		float ElapsedTime = CurrentTime - StartTime;
@@ -59,7 +59,7 @@ void UExWorldCooldownComponent::CheckDuration()
 		else
 		{
 			// Cooldown Inactive
-			CooldownActive = false;
+			IsCooldownActive = false;
 			OnCooldownEnd.Broadcast(this);
 		}
 	}

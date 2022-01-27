@@ -32,7 +32,7 @@ public:
 	void StartCooldown(AActor* Owner);
 
 private:
-	// Called to check if the current coldowns is active
+	// Called to check if the current coldown is active
 	void CheckDuration();
 
 	// Called to get the current time
@@ -58,5 +58,5 @@ public:
 private:
 	float StartTime;
 	UWorld* WorldContext;
-	bool CooldownActive;
+	bool IsCooldownActive;
 };

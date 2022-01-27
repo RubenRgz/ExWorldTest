@@ -31,9 +31,13 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void OnShootStart();
 
-	// Called when projectile actor overlaps an object
+	// Called when the server ends shoot calculation
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void OnShootEnd();
+
+	// Called when projectile actor overlaps an object
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void OnShootHits(AActor* AffectedActor);
 
 	// Called when projectile actor is spawned
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
