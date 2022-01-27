@@ -47,6 +47,17 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void OnApplyEffect(FEffectData EffectInfo);
 
+	// Function called on server to excute the below multicast function
+	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable)
+	void Server_CallFuncInEachClient(UObject* Object, const FString& FunctionName);
+	bool Server_CallFuncInEachClient_Validate(UObject* Object, const FString& FunctionName);
+	void Server_CallFuncInEachClient_Implementation(UObject* Object, const FString& FunctionName);
+
+	// Multicast function that executes the function given by name in each client
+	UFUNCTION(NetMulticast, Reliable)
+	void All_CallFuncInEachClient(UObject* Object, const FString& FunctionName);
+	void All_CallFuncInEachClient_Implementation(UObject* Object, const FString& FunctionName);
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Gameplay")
 	EObjectType ObjectType;

@@ -32,3 +32,32 @@ void AExWorldTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 }
 
+bool AExWorldTestCharacter::Server_CallFuncInEachClient_Validate(UObject* Object, const FString& FunctionName)
+{
+	if (Object && FunctionName.Len() > 0)
+		return true;
+	else
+		return false;
+}
+
+void AExWorldTestCharacter::Server_CallFuncInEachClient_Implementation(UObject* Object, const FString& FunctionName)
+{
+	All_CallFuncInEachClient(Object, FunctionName);
+}
+
+void AExWorldTestCharacter::All_CallFuncInEachClient_Implementation(UObject* Object, const FString& FunctionName)
+{
+	FName const FunctionFName(*FunctionName);
+
+	if (Object)
+	{
+		UFunction* const Func = Object->FindFunction(FunctionFName);
+
+		if (Func && (Func->ParmsSize == 0))
+		{
+			FTimerDelegate Delegate;
+			Delegate.BindUFunction(Object, FunctionFName);
+			Delegate.Execute();
+		}
+	}
+}
